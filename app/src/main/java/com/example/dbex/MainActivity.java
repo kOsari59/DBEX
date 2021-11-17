@@ -28,15 +28,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); StrictMode.setThreadPolicy(policy);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); StrictMode.setThreadPolicy(policy); //네트워크 접속을 위한 처리
         }
 
         txt = (TextView)findViewById(R.id.textView2);
         txt.setText(st);
-        ct = new connection();
-        ct.showResult();
+        
+        ct = new connection(); //연결 준비
+        ct.showResult(); //연결 후 결과 저장
 
-        txt.setText(ct.namelist.get(0));
+        txt.setText(ct.namelist.get(0)); // 결과출력
 
 
 
