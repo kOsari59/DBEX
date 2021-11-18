@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".loginresault"
+    android:orientation="vertical">
+
+    <TextView
+        android:textSize="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="아이디" />
+
+    <TextView
+        android:id="@+id/tid"
+        android:textSize="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID" />
+
+    <TextView
+
+        android:textSize="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="비밀번호" />
+
+    <TextView
+        android:id="@+id/tpw"
+        android:textSize="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PW" />
+
+    <TextView
+        android:textSize="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이름" />
+    <TextView
+        android:id="@+id/tname"
+        android:textSize="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NAME" />
+</LinearLayout>

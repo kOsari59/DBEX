@@ -2,9 +2,12 @@ package com.example.dbex;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -39,9 +42,15 @@ public class MainActivity extends AppCompatActivity {
 
         txt.setText(ct.namelist.get(0)); // 결과출력
 
+        Button loginbt = (Button) findViewById(R.id.Login);
 
-
-
+        loginbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,login.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
