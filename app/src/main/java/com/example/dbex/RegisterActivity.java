@@ -1,5 +1,6 @@
 package com.example.dbex;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,8 +20,8 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText et_id, et_pass, et_name;
-    private Button btn_register;
-
+    private Button btn_register,check_button;
+    private boolean validate = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,16 @@ public class RegisterActivity extends AppCompatActivity {
                         String userID = et_id.getText().toString();
                         String userPass = et_pass.getText().toString();
                         String userName = et_name.getText().toString();
+                        if (!validate) {
+                            Toast.makeText(getApplicationContext(),"중복된 아이디가 있는지 확인하세요.",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
+                        //한 칸이라도 입력 안했을 경우
+                        if (et_id.equals("") || et_pass.equals("") || et_name.equals("")) {
+                            Toast.makeText(getApplicationContext(),"모두 입력해주세요",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         Response.Listener<String> responseListener = new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -63,8 +73,53 @@ public class RegisterActivity extends AppCompatActivity {
                         RegisterRequest registerRequest = new RegisterRequest(userID,userPass,userName, responseListener);
                         RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                         queue.add(registerRequest);
-
             }
         });
+
+
+        check_button = findViewById(R.id.r_regicheck);
+        check_button.setOnClickListener(new View.OnClickListener() {@Override
+        public void onClick(View view) {
+            String UserEmail = et_id.getText().toString();
+            if (validate) {
+                return; //검증 완료
+            }
+
+            if (UserEmail.equals("")) {
+                Toast.makeText(getApplicationContext(),"아이디를 입력하세요",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.getBoolean("success");
+
+                        if (success) {
+                            Toast.makeText(getApplicationContext(),"사용할수 있는 아이디 입니다.",Toast.LENGTH_SHORT).show();
+                            et_id.setEnabled(false); //아이디값 고정
+                            validate = true; //검증 완료
+                            check_button.setEnabled(false);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(),"이미존재 하는 아이디 입니다.",Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        Log.d("aaaa", e.toString());
+                    }
+                }
+            };
+            ValidateRequest validateRequest = new ValidateRequest(UserEmail, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+            queue.add(validateRequest);
+        }
+        });
     }
-}
+
+
+    }
+
+
