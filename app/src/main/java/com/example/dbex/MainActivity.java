@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
         search_history.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this, com.example.dbex.search_history.class);
-                startActivity(it);
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), com.example.dbex.search_history.class);
+
             }
         });
 
