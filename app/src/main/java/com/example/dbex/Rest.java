@@ -9,15 +9,14 @@ import java.util.Map;
 
 public class Rest extends StringRequest {
     //서버 url 설정(php파일 연동)
-    final static  private String URL="http://10.0.2.2/Rest.php";
+    final static  private String URL="http://10.0.2.2/reshearch.php";
     private Map<String, String> map;
 
-    public Rest(String longtitude, String latitude, Response.Listener<String> listener){
+    public Rest(String id,  Response.Listener<String> listener){
         super(Method.POST, URL, listener,null);
 
         map = new HashMap<>();
-        map.put("long", longtitude);
-        map.put("lat", latitude);
+        map.put("ID", id);
     }
 
     @Override

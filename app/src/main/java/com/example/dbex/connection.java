@@ -29,8 +29,8 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
     ArrayList<String>numberlist= new ArrayList<>();
     ArrayList<String>namelist= new ArrayList<>();
     ArrayList<String>locationlist= new ArrayList<>();
-    ArrayList<String>latilist= new ArrayList<>();
-    ArrayList<String>longtilist= new ArrayList<>();
+    ArrayList<Double>latilist= new ArrayList<>();
+    ArrayList<Double>longtilist= new ArrayList<>();
     ArrayList<String>gradelist= new ArrayList<>();
     ArrayList<String>toplist= new ArrayList<>();
     @Override
@@ -102,8 +102,8 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
                 numberlist.add(number);
                 namelist.add(name);
                 locationlist.add(location);
-                latilist.add(lati);
-                longtilist.add(longti);
+                latilist.add(Double.valueOf(lati));
+                longtilist.add(Double.valueOf(longti));
                 gradelist.add(grade);
                 toplist.add(top);
             }

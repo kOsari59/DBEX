@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     String st="NULLL";
     connection ct;
     TextView cv;
-    String longi;
-    String latit;
+    double longi;
+    double latit;
     TextView txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                             if (success) { // 로그인에 성공한 경우
                                 String latitude = jsonObject.getString("latitude");
                                 String longitude = jsonObject.getString("longitude");
-                                longi = longitude;
-                                latit = latitude;
+                                longi = Double.parseDouble(longitude);
+                                latit = Double.parseDouble(latitude);
                                 Toast.makeText(getApplicationContext(),"설정 성공",Toast.LENGTH_SHORT).show();
                             } else { // 로그인에 실패한 경우
                                 Toast.makeText(getApplicationContext(),"설정 실패",Toast.LENGTH_SHORT).show();
@@ -110,43 +110,54 @@ public class MainActivity extends AppCompatActivity {
         pension.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i = 0; i<ct.idlist.size();i++){
-
-                }
-                Response.Listener<String> responseListener_r = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            // TODO : 인코딩 문제때문에 한글 DB인 경우 로그인 불가
-                            System.out.println("hongchul" + response);
-                            Toast.makeText(getApplicationContext(),"php 읽어옴."+response,Toast.LENGTH_SHORT).show();
-                            JSONObject jsonObject = new JSONObject(response);
-
-                            boolean success = jsonObject.getBoolean("success");
-                            if (success) { // 로그인에 성공한 경우
-
-                                String ID = jsonObject.getString("ID");
-                                String name = jsonObject.getString("name");
-                                String phone = jsonObject.getString("phone");
-                                String top = jsonObject.getString("top");
-                                String location = jsonObject.getString("location");
-                                String latitude = jsonObject.getString("latitude");
-                                String longitude = jsonObject.getString("longitude");
-                                String grade = jsonObject.getString("grade");
-
-                                txt.setText(ID+name+phone+top+location+latitude+longitude+grade);
-                            } else { // 로그인에 실패한 경우
-                                Toast.makeText(getApplicationContext(),"검색 실패",Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+                ArrayList<String> idd = new ArrayList<>();
+                hubu hu = new hubu();
+                try {
+                    for(int i = 0; i<ct.idlist.size();i++){
+                        if(30 < hu.hubua(ct.latilist.get(i),ct.longtilist.get(i),latit,longi)){
+                            idd.add(ct.idlist.get(i));
                         }
                     }
-                };
-                Rest r_search = new Rest(longi,latit , responseListener_r);
-                RequestQueue r_queue = Volley.newRequestQueue(MainActivity.this);
-                r_queue.add(r_search);
+                    for(int i =0 ; i<ct.idlist.size();i++){
+                        Response.Listener<String> responseListener_r = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    // TODO : 인코딩 문제때문에 한글 DB인 경우 로그인 불가
+                                    System.out.println("hongchul" + response);
+                                    Toast.makeText(getApplicationContext(),"php 읽어옴."+response,Toast.LENGTH_SHORT).show();
+                                    JSONObject jsonObject = new JSONObject(response);
+
+                                    boolean success = jsonObject.getBoolean("success");
+                                    if (success) { // 로그인에 성공한 경우
+
+                                        String ID = jsonObject.getString("id");
+                                        String name = jsonObject.getString("name");
+                                        String phone = jsonObject.getString("phone");
+                                        String top = jsonObject.getString("top");
+                                        String location = jsonObject.getString("location");
+                                        String latitude = jsonObject.getString("latitude");
+                                        String longitude = jsonObject.getString("longitude");
+                                        String grade = jsonObject.getString("grade");
+
+                                        txt.setText(ID+"\n"+name+"\n"+phone+"\n"+top+"\n"+location+"\n"+latitude+"\n"+longitude+"\n"+grade+"\n");
+                                    } else { // 로그인에 실패한 경우
+                                        Toast.makeText(getApplicationContext(),"검색 실패",Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        };
+                        Rest r_search = new Rest(idd.get(i), responseListener_r);
+                        RequestQueue r_queue = Volley.newRequestQueue(MainActivity.this);
+                        r_queue.add(r_search);
+                    }
+                }catch ( Exception e){
+                    Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+                }
+
             }
 
         });
