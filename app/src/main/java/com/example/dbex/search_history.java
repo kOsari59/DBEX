@@ -42,6 +42,8 @@ public class search_history extends AppCompatActivity {
     String mJsonString;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
