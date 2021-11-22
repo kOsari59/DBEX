@@ -3,6 +3,7 @@ package com.example.dbex;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -31,6 +32,7 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
     ArrayList<String>latilist= new ArrayList<>();
     ArrayList<String>longtilist= new ArrayList<>();
     ArrayList<String>gradelist= new ArrayList<>();
+    ArrayList<String>toplist= new ArrayList<>();
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -50,7 +52,7 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
         ResultSet rs;
         String str;
         URL url;
-        String url1 = "http://10.0.2.2/station.php"; //정류장의 모든 데이터 출력 PHP 파일
+        String url1 = "http://10.0.2.2/Rest.php"; //정류장의 모든 데이터 출력 PHP 파일
         InputStream json;
         String receiveMsg;
         json = null;
@@ -89,12 +91,13 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
             for(int i = 0 ; i<jsonArray.length(); i++){
                 jsonObject = jsonArray.getJSONObject(i); //순서대로 출력
                 String id = jsonObject.getString("id"); // id로 시작하는거 검색
-                String number = jsonObject.getString("number");// number로 시작하는거 검색
+                String number = jsonObject.getString("phone");// number로 시작하는거 검색
                 String name = jsonObject.getString("name");// name으로 시작하는거 검색
                 String location = jsonObject.getString("location");// location 으로 시작하는거 검색
                 String lati = jsonObject.getString("latitude");// latitude로 시작하는거 검색
-                String longti = jsonObject.getString("longtitude");// longtitude로 시작하는거 검색
+                String longti = jsonObject.getString("longitude");// longtitude로 시작하는거 검색
                 String grade = jsonObject.getString("grade");// grade로 시작하는거 검색
+                String top  = jsonObject.getString("top");
                 idlist.add(id);
                 numberlist.add(number);
                 namelist.add(name);
@@ -102,6 +105,7 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
                 latilist.add(lati);
                 longtilist.add(longti);
                 gradelist.add(grade);
+                toplist.add(top);
             }
         } catch (Exception e) {
             Log.d("zzzzjjjjj", e.toString());

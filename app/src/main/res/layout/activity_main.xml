@@ -27,22 +27,40 @@
         android:layout_height="wrap_content"
         />
     <Button
+        android:id="@+id/bt_station"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="정류장 설정"
+        />
+    <Button
         android:id="@+id/pension"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="펜션"
+        android:text="펜션 설정"
         />
     <Button
         android:id="@+id/restaurant"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="음식점"
+        android:text="음식점 설정"
         />
     <Button
         android:id="@+id/theme"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="테마파크"
+        android:text="테마파크 설정"
+        />
+    <Button
+        android:id="@+id/bt_search"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="주변 검색"
+        />
+    <Button
+        android:id="@+id/search_history"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="검색기록"
         />
 
 

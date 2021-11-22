@@ -12,7 +12,7 @@ public class pension {
     private Map<String,String> map;
 
     public pension(String ID, Response.Listener<String> listener){
-        super(Request.Method.POST, URL, listener, null);
+        //super(Request.Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("ID",ID);

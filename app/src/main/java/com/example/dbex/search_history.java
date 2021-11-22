@@ -52,7 +52,7 @@ public class search_history extends AppCompatActivity {
         mArrayList = new ArrayList<>();
 
         GetData task = new GetData();
-        task.execute("http://122.42.52.176:1123/search_history.php");
+        task.execute("http://10.0.0.2/search_history.php");
     }
 
     private class GetData extends AsyncTask<String, Void, String> {
