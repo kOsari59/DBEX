@@ -56,11 +56,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         cv = (TextView)findViewById(R.id.station);
-        Button pension,restaurant,theme;
+        Button pension,restaurant,theme,search_history;
 
         pension = (Button)findViewById(R.id.pension);
         restaurant = (Button)findViewById(R.id.restaurant);
         theme = (Button)findViewById(R.id.theme);
+        search_history = (Button)findViewById(R.id.search_history);
 
         pension.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +100,16 @@ public class MainActivity extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest(userID, userPass, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(login.this);
                 queue.add(loginRequest);
+            }
+
+        });
+
+
+        search_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),search_history);
+                startActivity(intent);
             }
 
         });

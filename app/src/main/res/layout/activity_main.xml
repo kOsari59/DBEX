@@ -45,5 +45,12 @@
         android:text="테마파크"
         />
 
+    <Button
+        android:id="@+id/search_history"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="최근검색"
+        />
+
 
 </LinearLayout>
