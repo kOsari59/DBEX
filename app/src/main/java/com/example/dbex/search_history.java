@@ -42,8 +42,6 @@ public class search_history extends AppCompatActivity {
     String mJsonString;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +52,7 @@ public class search_history extends AppCompatActivity {
         mArrayList = new ArrayList<>();
 
         GetData task = new GetData();
-        task.execute("http://10.0.0.2/search_history.php");
+        task.execute("http://10.0.2.2/search_history.php");
     }
 
     private class GetData extends AsyncTask<String, Void, String> {
@@ -134,8 +132,6 @@ public class search_history extends AppCompatActivity {
 
         }
     }
-
-
 
     private void showResult(){
         try {

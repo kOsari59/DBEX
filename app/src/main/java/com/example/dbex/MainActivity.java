@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), com.example.dbex.search_history.class);
-
+                startActivity(intent);
             }
         });
 
@@ -112,20 +112,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ArrayList<String> idd = new ArrayList<>();
                 hubu hu = new hubu();
-                try {
                     for(int i = 0; i<ct.idlist.size();i++){
                         if(30 < hu.hubua(ct.latilist.get(i),ct.longtilist.get(i),latit,longi)){
                             idd.add(ct.idlist.get(i));
                         }
                     }
-                    for(int i =0 ; i<ct.idlist.size();i++){
+                    Toast.makeText(getApplicationContext(),Integer.toString(ct.idlist.size()),Toast.LENGTH_SHORT).show();
+                    for(int i =0 ; i<idd.size();i++){
                         Response.Listener<String> responseListener_r = new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
                                     // TODO : 인코딩 문제때문에 한글 DB인 경우 로그인 불가
                                     System.out.println("hongchul" + response);
-                                    Toast.makeText(getApplicationContext(),"php 읽어옴."+response,Toast.LENGTH_SHORT).show();
                                     JSONObject jsonObject = new JSONObject(response);
 
                                     boolean success = jsonObject.getBoolean("success");
@@ -154,9 +153,7 @@ public class MainActivity extends AppCompatActivity {
                         RequestQueue r_queue = Volley.newRequestQueue(MainActivity.this);
                         r_queue.add(r_search);
                     }
-                }catch ( Exception e){
-                    Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
-                }
+
 
             }
 
