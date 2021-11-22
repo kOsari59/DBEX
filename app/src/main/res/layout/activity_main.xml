@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
@@ -20,6 +21,29 @@
         android:layout_height="wrap_content"
         android:text="로그인"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    <EditText
+        android:id="@+id/station"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:id="@+id/pension"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="펜션"
+        />
+    <Button
+        android:id="@+id/restaurant"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="음식점"
+        />
+    <Button
+        android:id="@+id/theme"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="테마파크"
+        />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
