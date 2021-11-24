@@ -5,13 +5,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic = "true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DBEX">
+        android:theme="@style/Theme.DBEX"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Resault"
+            android:exported="true" />
         <activity
             android:name=".loginresault"
             android:exported="true" />
@@ -21,15 +24,12 @@
         <activity
             android:name=".login"
             android:exported="true" />
-
-        <activity android:name=".search_history"
-            android:exported="true"/>
-
+        <activity
+            android:name=".search_history"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

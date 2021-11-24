@@ -8,6 +8,9 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,29 +25,30 @@ import org.w3c.dom.Text;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     String st="NULLL";
+    public static ArrayList<HashMap<String, String>> al;
+
     connection ct;
     TextView cv;
+    TextView tv;
     double longi;
     double latit;
-    TextView txt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        al =new ArrayList<>();
         setContentView(R.layout.activity_main);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); StrictMode.setThreadPolicy(policy); //네트워크 접속을 위한 처리
         }
 
-        txt = (TextView)findViewById(R.id.textView2);
-        txt.setText(st);
-
         try{
             ct = new connection(); //연결 준비
             ct.showResult(); //연결 후 결과 저장
-            txt.setText(ct.namelist.get(0)); // 결과출력
         }catch (Exception e){
             Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
         }
@@ -61,11 +65,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         cv = (TextView)findViewById(R.id.station);
-        Button pension,restaurant,theme,bt_station,bt_search,search_history;
+        Button pension,rest,theme,bt_station,bt_search,search_history;
 
-        pension = (Button)findViewById(R.id.pension);
+
+
+        rest = (Button)findViewById(R.id.rest);
         bt_station = (Button) findViewById(R.id.bt_station);
         search_history = (Button) findViewById(R.id.search_history);
+        bt_search = (Button) findViewById(R.id.rsear);
 
         search_history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +82,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        bt_search.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Resault.class);
+                startActivity(intent);
+
+            }
+            });
 
         bt_station.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String station = cv.getText().toString();
@@ -89,11 +105,12 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if (success) { // 로그인에 성공한 경우
+                                String name = jsonObject.getString("name");
                                 String latitude = jsonObject.getString("latitude");
                                 String longitude = jsonObject.getString("longitude");
                                 longi = Double.parseDouble(longitude);
                                 latit = Double.parseDouble(latitude);
-                                Toast.makeText(getApplicationContext(),"설정 성공",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"검색할 정류장은 "+ name,Toast.LENGTH_SHORT).show();
                             } else { // 로그인에 실패한 경우
                                 Toast.makeText(getApplicationContext(),"설정 실패",Toast.LENGTH_SHORT).show();
                                 return;
@@ -109,17 +126,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        pension.setOnClickListener(new View.OnClickListener() {
+        rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ArrayList<String> idd = new ArrayList<>();
                 hubu hu = new hubu();
                     for(int i = 0; i<ct.idlist.size();i++){
-                        if(30 < hu.hubua(ct.latilist.get(i),ct.longtilist.get(i),latit,longi)){
+                        if(30 > hu.hubua(ct.latilist.get(i),ct.longtilist.get(i),latit,longi)){
                             idd.add(ct.idlist.get(i));
                         }
                     }
-                    Toast.makeText(getApplicationContext(),Integer.toString(ct.idlist.size()),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"검색된 결과는" + idd.size()+"개 입니다",Toast.LENGTH_SHORT).show();
                     for(int i =0 ; i<idd.size();i++){
                         Response.Listener<String> responseListener_r = new Response.Listener<String>() {
                             @Override
@@ -141,13 +158,24 @@ public class MainActivity extends AppCompatActivity {
                                         String longitude = jsonObject.getString("longitude");
                                         String grade = jsonObject.getString("grade");
 
-                                        txt.setText(ID+"\n"+name+"\n"+phone+"\n"+top+"\n"+location+"\n"+latitude+"\n"+longitude+"\n"+grade+"\n");
+                                        HashMap<String,String> hashMap = new HashMap<>();
+                                        hashMap.put("id", ID);
+                                        hashMap.put("name", name);
+                                        hashMap.put("phone", phone);
+                                        hashMap.put("top", top);
+                                        hashMap.put("location", location);
+                                        hashMap.put("latitude", longitude);
+                                        hashMap.put("grade", grade);
+
+
+                                        al.add(hashMap);
+
                                     } else { // 로그인에 실패한 경우
                                         Toast.makeText(getApplicationContext(),"검색 실패",Toast.LENGTH_SHORT).show();
                                         return;
                                     }
                                 } catch (Exception e) {
-                                    Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"검색 오류",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         };
@@ -156,14 +184,18 @@ public class MainActivity extends AppCompatActivity {
                         r_queue.add(r_search);
                     }
 
-
             }
+
+
+
+
 
         });
 
 
 
     }
+
 
 
 }
