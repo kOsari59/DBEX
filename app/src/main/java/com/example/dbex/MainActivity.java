@@ -40,10 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
         txt = (TextView)findViewById(R.id.textView2);
         txt.setText(st);
-        
-         ct = new connection(); //연결 준비
-         ct.showResult(); //연결 후 결과 저장
-         txt.setText(ct.namelist.get(0)); // 결과출력
+
+        try{
+            ct = new connection(); //연결 준비
+            ct.showResult(); //연결 후 결과 저장
+            txt.setText(ct.namelist.get(0)); // 결과출력
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+        }
+
 
         Button loginbt = (Button) findViewById(R.id.Login);
 
@@ -59,10 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Button pension,restaurant,theme,bt_station,bt_search,search_history;
 
         pension = (Button)findViewById(R.id.pension);
-        restaurant = (Button)findViewById(R.id.restaurant);
-        theme = (Button)findViewById(R.id.theme);
         bt_station = (Button) findViewById(R.id.bt_station);
-        bt_search = (Button) findViewById(R.id.bt_search);
         search_history = (Button) findViewById(R.id.search_history);
 
         search_history.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
 
 
 

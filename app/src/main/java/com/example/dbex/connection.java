@@ -52,7 +52,7 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
         ResultSet rs;
         String str;
         URL url;
-        String url1 = "http://10.0.2.2/Rest.php"; //정류장의 모든 데이터 출력 PHP 파일
+        String url1 = "http://10.0.2.2/Rest.php"; //레스토랑 모든 데이터 출력 PHP 파일
         InputStream json;
         String receiveMsg;
         json = null;
