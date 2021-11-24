@@ -22,6 +22,7 @@ import org.w3c.dom.Text;
 public class login extends AppCompatActivity {
     private EditText et_id, et_pass;
     private Button btn_login, btn_register;
+    public static boolean login_state = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +69,8 @@ public class login extends AppCompatActivity {
                                         intent.putExtra("userPassword", userPass);
                                         intent.putExtra("userName", userName);
                                         startActivity(intent);
+
+                                        login_state = true;
                                     } else { // 로그인에 실패한 경우
                                         Toast.makeText(getApplicationContext(),"로그인에 실패하였습니다.",Toast.LENGTH_SHORT).show();
                                         return;
