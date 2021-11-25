@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class connection_t extends AsyncTask<String,Void,String>{ //DB연동 시험으로 정류장 DB연동해 놓음
+public class connection_t extends AsyncTask<String,Void,String>{ //태마 테이블에 모든 값 출력
     JSONArray jsonArray;
     ArrayList<String> idlist = new ArrayList<>();
     ArrayList<String>numberlist= new ArrayList<>();
@@ -51,7 +51,7 @@ public class connection_t extends AsyncTask<String,Void,String>{ //DB연동 시�
         json = null;
         receiveMsg = "null";
         try {
-            url = new URL(url1);
+            url = new URL(url1); //새로운 url 설정
             HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //연결 설정
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
             if (conn.getResponseCode() == conn.HTTP_OK) {
@@ -90,13 +90,13 @@ public class connection_t extends AsyncTask<String,Void,String>{ //DB연동 시�
                 String lati = jsonObject.getString("latitude");// latitude로 시작하는거 검색
                 String longti = jsonObject.getString("longitude");// longtitude로 시작하는거 검색
                 String grade = jsonObject.getString("grade");// grade로 시작하는거 검색
-                idlist.add(id);
-                numberlist.add(number);
-                namelist.add(name);
-                locationlist.add(location);
-                latilist.add(Double.valueOf(lati));
-                longtilist.add(Double.valueOf(longti));
-                gradelist.add(grade);
+                idlist.add(id); //아이디값 저장
+                numberlist.add(number); //번호 저장
+                namelist.add(name); //이름 저장
+                locationlist.add(location); //위치 저장
+                latilist.add(Double.valueOf(lati)); //위도 저장
+                longtilist.add(Double.valueOf(longti)); //경도 저장
+                gradelist.add(grade); //점수 별점 저장
             }
         } catch (Exception e) {
             Log.d("zzzzjjjjj", e.toString());

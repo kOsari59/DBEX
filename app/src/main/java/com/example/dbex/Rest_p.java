@@ -7,7 +7,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Rest_p extends StringRequest {
+public class Rest_p extends StringRequest { //팬션 검색 할때 던질 부분 만들기
     //서버 url 설정(php파일 연동)
     final static  private String URL="http://10.0.2.2/pesearch.php";
     private Map<String, String> map;

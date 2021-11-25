@@ -18,7 +18,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity { //가입 부분
     private EditText et_id, et_pass, et_name;
     private Button btn_register,check_button;
     private boolean validate = false;
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
                         String userID = et_id.getText().toString();
                         String userPass = et_pass.getText().toString();
                         String userName = et_name.getText().toString();
-                        if (!validate) {
+                        if (!validate) { //ID가 중복인지 확인하는 버튼 눌러 중복 아닌거 확인 받았는지 확인
                             Toast.makeText(getApplicationContext(),"중복된 아이디가 있는지 확인하세요.",Toast.LENGTH_SHORT).show();
                             return;
                         }

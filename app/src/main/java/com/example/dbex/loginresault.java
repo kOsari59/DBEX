@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class loginresault extends AppCompatActivity {
+public class loginresault extends AppCompatActivity { //로그인 결과 출력
     private TextView tv_id, tv_pass ,tv_name;
 
     @Override

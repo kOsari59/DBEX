@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class search_history extends AppCompatActivity {
+public class search_history extends AppCompatActivity { //검색 기록창 
 
     private static String TAG = "search_history";
 
@@ -55,7 +55,7 @@ public class search_history extends AppCompatActivity {
         task.execute("http://10.0.2.2/search_history.php");
     }
 
-    private class GetData extends AsyncTask<String, Void, String> {
+    private class GetData extends AsyncTask<String, Void, String> { //AsyncTask로 인터넷 작업해야 오류 없음
         ProgressDialog progressDialog;
         String errorString = null;
 
@@ -67,7 +67,7 @@ public class search_history extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String result_e) {
+        protected void onPostExecute(String result_e) { //로딩 창 띄우기
             super.onPostExecute(result_e);
 
             progressDialog.dismiss();
@@ -83,7 +83,7 @@ public class search_history extends AppCompatActivity {
 
         }
 
-        protected String doInBackground(String... params) {
+        protected String doInBackground(String... params) { //연결하기 
             String serverURL = params[0];
 
 
@@ -133,7 +133,7 @@ public class search_history extends AppCompatActivity {
         }
     }
 
-    private void showResult(){
+    private void showResult(){ //결과 추력
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);

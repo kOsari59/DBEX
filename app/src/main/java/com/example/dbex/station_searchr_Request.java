@@ -7,16 +7,16 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class station_searchr_Request extends StringRequest {
+public class station_searchr_Request extends StringRequest { //스테이션 검색
     //서버 url 설정(php파일 연동)
     final static  private String URL="http://10.0.2.2/station_search.php";
     private Map<String, String> map;
 
-    public station_searchr_Request(String UserEmail, Response.Listener<String> listener){
+    public station_searchr_Request(String id, Response.Listener<String> listener){
         super(Method.POST, URL, listener,null);
 
         map = new HashMap<>();
-        map.put("ID", UserEmail);
+        map.put("ID", id);
     }
 
     @Override
