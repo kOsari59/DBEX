@@ -13,7 +13,13 @@
         android:theme="@style/Theme.DBEX"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity_resault_p"
+            android:exported="true" />
+        <activity
             android:name=".Resault"
+            android:exported="true" />
+        <activity
+            android:name=".Resault_p"
             android:exported="true" />
         <activity
             android:name=".loginresault"

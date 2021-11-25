@@ -7,36 +7,43 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-    <Button
+     <Button
         android:id="@+id/Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="로그인"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     <EditText
         android:id="@+id/station"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         />
+
     <Button
         android:id="@+id/bt_station"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="정류장 설정"
         />
 
     <Button
-        android:id="@+id/rest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="음식점 설정" />
-
-    <Button
-        android:id="@+id/rsear"
+        android:id="@+id/restrant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="음식점 검색" />
+
+    <Button
+        android:id="@+id/pension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="팬션 검색" />
+
+    <Button
+        android:id="@+id/theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="테마 관광지 검색" />
 
     <Button
         android:id="@+id/search_history"

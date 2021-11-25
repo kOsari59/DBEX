@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Resault">
+    tools:context=".activity_resault_p">
 
     <ListView
         android:layout_width="match_parent"

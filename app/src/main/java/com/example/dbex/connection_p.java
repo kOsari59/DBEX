@@ -1,13 +1,7 @@
 package com.example.dbex;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험으로 정류장 DB연동해 놓음
+public class connection_p extends AsyncTask<String,Void,String>{ //DB연동 시험으로 정류장 DB연동해 놓음
     JSONArray jsonArray;
     ArrayList<String> idlist = new ArrayList<>();
     ArrayList<String>numberlist= new ArrayList<>();
@@ -32,7 +26,6 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
     ArrayList<Double>latilist= new ArrayList<>();
     ArrayList<Double>longtilist= new ArrayList<>();
     ArrayList<String>gradelist= new ArrayList<>();
-    ArrayList<String>toplist= new ArrayList<>();
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -52,7 +45,7 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
         ResultSet rs;
         String str;
         URL url;
-        String url1 = "http://10.0.2.2/restrant.php"; //레스토랑 모든 데이터 출력 PHP 파일
+        String url1 = "http://10.0.2.2/pension.php"; //레스토랑 모든 데이터 출력 PHP 파일
         InputStream json;
         String receiveMsg;
         json = null;
@@ -97,7 +90,6 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
                 String lati = jsonObject.getString("latitude");// latitude로 시작하는거 검색
                 String longti = jsonObject.getString("longitude");// longtitude로 시작하는거 검색
                 String grade = jsonObject.getString("grade");// grade로 시작하는거 검색
-                String top  = jsonObject.getString("top");
                 idlist.add(id);
                 numberlist.add(number);
                 namelist.add(name);
@@ -105,7 +97,6 @@ public class connection extends AsyncTask<String,Void,String>{ //DB연동 시험
                 latilist.add(Double.valueOf(lati));
                 longtilist.add(Double.valueOf(longti));
                 gradelist.add(grade);
-                toplist.add(top);
             }
         } catch (Exception e) {
             Log.d("zzzzjjjjj", e.toString());
